@@ -1,0 +1,125 @@
+:root {
+  --sakura: #fadbe0;
+  --ume: #eaadbd;
+  --sumire: #554562;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 游明朝,"Yu Mincho",YuMincho,"Hiragino Mincho ProN","Hiragino Mincho Pro",HGS明朝E,メイリオ,Meiryo,serif;
+}
+
+.title {
+  font-size: 9.0rem;
+  letter-spacing: 14px;
+}
+
+.sub-title {
+  font-size: 6.0rem;
+  letter-spacing: 12px;
+}
+
+.text {
+  font-size: 5.0rem;
+  letter-spacing: 10px;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.view {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+}
+
+.view-back {
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  background: 0 0;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(90%) opacity(80%);
+}
+
+.base {
+  height: 100vh;
+  perspective: 100px;
+  perspective-origin: top center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.base * {
+  transform-style: preserve-3d;
+}
+
+.ume {
+  background-color: var(--ume);
+}
+
+.sakura {
+  background-color: var(--sakura);
+}
+
+.sumire {
+  background-color: var(--sumire);
+}
+
+.box-l {
+  width: 150px;
+  height: 250px;
+  transition-duration: 0.5s;
+}
+.box-l.hide {width: 0;}
+
+.box-m {
+  width: 100px;
+  height: 180px;
+  transition-duration: 0.5s;
+}
+.box-m.hide {width: 0;}
+
+.box-s {
+  width: 60px;
+  height: 60px;
+  transition-duration: 0.5s;
+}
+.box-s.hide {width: 0;}
+
+.float1 {
+  transform: translateZ(20px) scale(1);
+  z-index: 1;
+}
+.float2 {
+  transform: translateZ(40px) scale(0.7);
+  z-index: 2;
+}
+.float3 {
+  transform: translateZ(50px) scale(0.6);
+  z-index: 3;
+}
+.float4 {
+  transform: translateZ(60px) scale(0.5);
+  z-index: 4;
+}
