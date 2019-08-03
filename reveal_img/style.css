@@ -1,11 +1,24 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  font-size: 62.5%;
+  line-height: 1.15;
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #fcfcfc;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .wrap {
@@ -18,7 +31,91 @@ body {
   flex-wrap: wrap;
 }
 
+/* top design */
+.top {
+  width: 100vw;
+  height: 100vh;
+  padding: 40px;
+  background-color: #333;
+  color: #fafafa;
+}
 
+.scroll-btn {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+
+  bottom: 0;
+  display: inline-block;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  padding-bottom: 136px;
+}
+
+.scroll-btn::after {
+  animation: scroll-sign 1.8s cubic-bezier(.645, .045, .355, 1) infinite both;
+  background-color: #fafafa;
+  content: '';
+  height: 80px;
+  width: 2px;
+}
+
+.scroll-btn,
+.scroll-btn::after {
+  bottom: 0;
+  display: inline-block;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.scroll-btn__txt {
+  display: inline-block;
+  font-size: 16px;
+  letter-spacing: .4em;
+  transform: rotate(90deg);
+}
+
+.text {
+  font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+  line-height: 1.2;
+}
+
+.text.primary {font-size: 80px;}
+.text.sub {font-size: 50px;}
+.text.normal {font-size: 32px;}
+.text.mini {font-size: 20px;}
+
+
+@keyframes scroll-sign {
+  0% {
+    transform: scale3d(1, 1, 1);
+    transform-origin: bottom;
+  }
+
+  50% {
+    transform: scale3d(1, 0, 1);
+    transform-origin: bottom;
+  }
+
+  51% {
+    transform: scale3d(1, 0, 1);
+    transform-origin: top;
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+    transform-origin: top;
+  }
+}
+
+
+/* reveal design  */
 
 :root {
   --ease-out: cubic-bezier(.19, 1, .22, 1);
@@ -28,7 +125,8 @@ body {
   overflow: hidden;
   position: relative;
   width: 500px;
-  height: 400px;
+  height: 300px;
+  margin-top: 50px;
 }
 
 .reveal-box .reveal-box-wrap,

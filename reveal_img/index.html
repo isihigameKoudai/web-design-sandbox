@@ -23,24 +23,38 @@
 	</head>
 	<body>
 		<div id="app">
-      <div class="wrap">
-        <div
-          v-for="(img, i) in imgLists"
-          :key="i"
-          class="reveal-box js-reveal"
-        >
-          <span class="reveal-box-wrap">
-            <img
-              class="box-img"
-              :src="img.path"
-              alt=""
-            />
-          </span>
-        </div>
-      </div>
+      <article>
+        <section class="top">
+          <p class="text primary">&lt;/&gt; desing-sand-box</p>
+          <p class="text sub">&lt;/&gt; desing-sand-box</p>
+          <p class="text normal">&lt;/&gt; desing-sand-box</p>
+          <p class="text mini">&lt;/&gt; desing-sand-box</p>
+          <button
+            class="scroll-btn"
+            type="button"
+            @click="onClickScroll"
+          >
+              <span class="scroll-btn__txt"><a href="#images">SCROLL</a></span>
+          </button>
+        </section>
+        <section id="images" class="wrap">
+          <div
+            v-for="(img, i) in imgLists"
+            :key="i"
+            class="reveal-box js-reveal"
+          >
+            <span class="reveal-box-wrap">
+              <img
+                class="box-img"
+                :src="img.path"
+                alt=""
+              />
+            </span>
+          </div>
+        </section>
+      </article>
     </div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue-observe-visibility@0.4.4/dist/vue-observe-visibility.umd.min.js"></script>
 	<script src="./script.js"></script>
 </html>

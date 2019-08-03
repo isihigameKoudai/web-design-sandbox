@@ -47,12 +47,9 @@ new Vue({
       const targets = document.querySelectorAll(className);
       targets.forEach(target => observer.observe(target));
     },
-    showImage(e) {
-      this.imgLists[e].isShow = true;
-
-    },
-    className(isShow) {
-      return isShow ? 'show' : '';
+    onClickScroll() {
+      const top = document.querySelector('.top');
+      window.scroll(top.innerHeight);
     }
   }
 });
