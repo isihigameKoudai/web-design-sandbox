@@ -29,15 +29,19 @@ body {
   height: 400px;
 }
 
-.reveal-box-wrap {
-  animation: reveal-effect-before 1s var(--ease-out) 2s both;
+.reveal-box .reveal-box-wrap,
+.reveal-box .reveal-box-wrap::after {
+  display: none;
+}
+.reveal-box.show .reveal-box-wrap {
+  animation: reveal-effect-before 1s var(--ease-out) 0s both;
   display: inline-block;
   position: relative;
   z-index: 0;
 }
 
-.reveal-box-wrap::after {
-  animation: reveal-effect-after 1s var(--ease-out) 2.4s both;
+.reveal-box.show .reveal-box-wrap::after {
+  animation: reveal-effect-after 1s var(--ease-out) 0.4s both;
   background: #333;
   content: '';
   display: inline-block;
@@ -49,6 +53,7 @@ body {
   width: 100%;
   z-index: 1;
 }
+
 
 .box-img {
   height: auto;
