@@ -28,6 +28,7 @@ new Vue({
     setIntersectionObserver(className) {
       // Observerの設定
       const options = {
+        // root: document.querySelector('#scrollArea'), // 対象要素が発火するべき到達エリア
         threshold: 1.0
       };
 
