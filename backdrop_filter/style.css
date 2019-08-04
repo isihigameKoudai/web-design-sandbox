@@ -1,0 +1,122 @@
+/* setting */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Dancing Script', cursive;
+  background-image: url('./img/sample1.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.title-text {
+  letter-spacing: 1.4px;
+  margin-top: 80px;
+  font-weight: bold;
+  font-size: 48px;
+  text-align: center;
+}
+
+.wrap {
+  width: 760px;
+  margin: 40px auto 0;
+  padding-bottom: 80px;
+}
+
+.btn-humburger:hover {
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.btn-humburger > div {
+  position: absolute;
+  width: 56px;
+  height: 3px;
+  transition: all 0.2s;
+  background-color: #fafafa;
+}
+
+.btn-humburger > div:first-child {
+  top: 15px;
+  left: 0;
+}
+
+.btn-humburger > div:last-child {
+  bottom: 15px;
+  left: 0;
+}
+
+.btn-humburger.is-active > div {
+  background-color: #ffffff;
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.btn-humburger.is-active > div:first-child {
+  -webkit-transform: translateY(11px) rotate(45deg);
+  transform: translateY(11px) rotate(45deg);
+}
+
+.btn-humburger.is-active > div:last-child {
+  -webkit-transform: translateY(-10px) rotate(-45deg);
+      transform: translateY(-10px) rotate(-45deg);
+}
+
+.btn-humburger {
+  top: 45%;
+  right: 50px;
+  position: fixed;
+  display: block;
+  width: 56px;
+  height: 56px;
+  background: transparent;
+  z-index: 110;
+  transition: filter 0.2s;
+}
+
+.modal-container {
+  position: relative;
+  z-index: 100;
+}
+
+.modal-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(4px) brightness(0.9);
+}
+
+.fade-enter-active, .fade-leave-to {
+  transition: opacity 0.5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.modal-content .modal-item {
+  font-size: 48px;
+  letter-spacing: 1.4;
+  text-align: center;
+  padding: 10px;
+  color: #fafafa;
+  filter: drop-shadow(3px 3px 4px #666);
+}
+
+.modal-content a {
+  color: #F2F8FF;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
