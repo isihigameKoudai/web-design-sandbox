@@ -1,0 +1,168 @@
+/*
+Drk mode optimized colors made by HIG.
+https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/#dynamic-system-colors
+https://kudakurage.hatenadiary.com/entry/2019/07/29/083000
+*/
+
+:root {
+  --red: #ff3b30;
+  --pink: #ff2d55;
+  --orange: #ff9500;
+  --yellow: #ffcc00;
+  --green: #34c759;
+  --teal: #5ac8fa;
+  --blue: #007aff;
+  --indigo: #5856d6;
+  --purple: #af52de;
+
+  /* non-colored */
+  --gray-: #8e8e93;
+  --gray2: #aeaeb2;
+  --gray3: #c7c7cc;
+  --gray4: #d1d1d6;
+  --gray5: #e5e5ea;
+  --gray6: #f2f2f7;
+
+  --black: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --red: #ff453a;
+    --pink: #ff375f;
+    --orange: #ff9f0a;
+    --yellow: #ffd60a;
+    --green: #30d158;
+    --teal: #0ad2ff;
+    --blue: #0a84ff;
+    --indigo: #5e5ce6;
+    --purple: #bf5af2;
+
+    /* non-colored */
+    --gray-: #98989d;
+    --glay2: #636366;
+    --gray3: #48484a;
+    --gray4: #3a3a3c;
+    --gray5: #2c2c2e;
+    --gray6: #1c1c1e;
+
+    --black: #fcfcfc;
+  }
+}
+
+/* setting */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--gray6);
+  color: var(--black);
+  font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+.title-text {
+  letter-spacing: 1.4px;
+  margin-top: 80px;
+  font-weight: bold;
+  font-size: 48px;
+  text-align: center;
+}
+
+.wrap {
+  width: 760px;
+  margin: 40px auto 0;
+  padding-bottom: 80px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 80px;
+}
+
+.container__box {
+  width: 200px;
+  height: 200px;
+  margin-top: 40px;
+  border-radius: 20px;
+  background: var(--gray6);
+  border-style: solid;
+  border-width: 8px;
+  border-style: solid;
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 1.4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: scale 0.6s ease 0s;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0.6);
+  }
+  40% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.box-red {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.box-pink {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+.box-orange {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.box-yellow {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.box-green {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.box-teal {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+.box-blue {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.box-indigo {
+  color: var(--indigo);
+  border-color: var(--indigo);
+}
+
+.box-purple {
+  color: var(--purple);
+  border-color: var(--purple);
+}
