@@ -1,0 +1,38 @@
+:root {
+  --sakura: #fadbe0;
+  --ume: #eaadbd;
+  --sumire: #554562;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.back-img {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./img/ripple.JPG);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+}
+
+@keyframes changeGradation {
+  0% {
+    background-position: 50% 0%
+  }
+  50% {
+    background-position: 50% 100%
+  }
+  100% {
+    background-position: 50% 0%
+  }
+}
