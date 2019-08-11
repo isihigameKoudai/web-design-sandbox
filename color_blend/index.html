@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="./img/top.png" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="./img/top.png" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="./img/top.png" />
+
+    <link rel="dns-prefetch" href="/" />
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+
+		<title>color-blend</title>
+	</head>
+	<body>
+    <div id="app">
+      <ul>
+        <li class="color-list">
+          <span>Circle 1</span>
+          <input
+            type="color"
+            name="color1"
+            :value="color1"
+            @input="e => inputColor('color1', e)"
+          />
+        </li>
+        <li class="color-list">
+          <span>Circle 2</span>
+          <input
+            type="color"
+            name="color2"
+            :value="color2"
+            @input="e => inputColor('color2', e)"
+          />
+        </li>
+        <li class="color-list">
+          <span>Circle 3</span>
+          <input
+            type="color"
+            name="color3"
+            :value="color3"
+            @input="e => inputColor('color3', e)"
+          />
+        </li>
+        <li>
+          <span>blend-mode</span>
+          <select
+            v-model="selected"
+            name="blend"
+            id=""
+          >
+            <option
+              v-for="(list, i) in blendModeList"
+              :key="i"
+              :value="list.value"
+            >{{ list.value }}</option>
+          </select>
+        </li>
+      </ul>
+      <svg class="svg-wrap">
+        <g class="isolate">
+          <circle :style="blendStyleName" cx="80" cy="80" r="80" :fill="color1"/>
+          <circle :style="blendStyleName" cx="160" cy="80" r="80" :fill="color2"/>
+          <circle :style="blendStyleName" cx="120" cy="160" r="80" :fill="color3"/>
+        </g>
+      </svg>
+    </div>
+  </body>
+  <script defer src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script defer src="./script.js"></script>
+</html>
