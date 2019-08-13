@@ -38,6 +38,7 @@ body {
 .add-menu.is-open {
   width: 24.5rem;
   height: 24.5rem;
+  background: #333;
   animation-name: open-menu;
 }
 
@@ -57,16 +58,15 @@ body {
   height: 4px;
   transform: translate(-50%, -50%);
   background-color: #a6a6a6;
-  animation: 0.4s ease 0s;
+  animation-fill-mode: forwards;
 }
 
 .add-menu__icon-bar:last-child {
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
-.is-open .add-menu__icon-bar {
-  transition: rotate(405deg);
-  animation-name: rotate-menu;
+.is-open .add-menu__icon-bar:last-child {
+  animation: rotate-menu 1s ease-in 0;
 }
 
 @keyframes open-menu {
@@ -89,8 +89,12 @@ body {
 }
 
 @keyframes rotate-menu {
-  0% {transition: rotate(0)}
-  100% {transition: rotate(405deg)}
+  0% {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(270deg);
+  }
 }
 
 

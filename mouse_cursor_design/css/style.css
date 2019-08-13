@@ -1,0 +1,162 @@
+:root {
+  --background-main: #222;
+  --brand-main-color: #634c39;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: aw-conqueror-didot, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', 'Yu Mincho', 'YuMincho', 'Noto Sans Japanese', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}
+
+body {
+  background: var(--background-main);
+  color: var(--brand-main-color);
+  font-family: 'DM Serif Display', serif;
+}
+
+/* カーソルのスタイル */
+body {
+  position: relative;
+  cursor: none;
+}
+
+.cursor,
+.follower {
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: none;
+  pointer-events: none;
+}
+
+.cursor {
+  width: 8px;
+  height: 8px;
+  background-color: #eee;
+  opacity: 0.8;
+  z-index: 1001;
+}
+
+.follower {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: solid 1px #aaa;
+  z-index: 1000;
+}
+
+/* ページ用スタイル */
+
+.wrap {
+  padding: 40px;
+}
+
+.sub-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+  margin: 40px auto 0;
+}
+
+.sub-wrap > div {
+  width: 50%;
+  padding: 36px;
+}
+
+.wrap-top {
+  width: 100%;
+  height: calc(100vh - 300px);
+  min-height: 400px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-image: url(../img/top.jpg);
+  background-size: cover;
+}
+
+.title {
+  font-size: 9.6em;
+  position: relative;
+  width: fit-content;
+  padding-bottom: 10px;
+  letter-spacing: 1.4px;
+}
+
+.text {
+  font-size: 3.6em;
+  letter-spacing: 1.4px;
+  line-height: 1.4;
+}
+
+.img {
+  width: 100%;
+  transition-duration: 0.4s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-wrap {
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: repeating-linear-gradient(45deg, hsla(60,99%,40%,1), hsla(170,99%,41%,1), hsla(335,100%,41%,1), hsla(271,99%,33%,1)) 0 0/200% no-repeat;
+  mix-blend-mode: difference;
+}
+
+.img-wrap:hover img {
+  transform: translate(-50%, -50%) scale(1.1);
+  mix-blend-mode: difference;
+}
+
+.link {
+  margin-top: 30px;
+
+  cursor: none;
+  width: fit-content;
+  height: 58px;
+  font-size: 3.6em;
+  color: var(--brand-main-color);
+  text-decoration: none;
+  padding: 10px 20px;
+  letter-spacing: 1.4px;
+  display: block;
+  border: solid 1px var(--brand-main-color);
+}
+
+
+.label-reveal {
+  position: relative;
+}
+
+.label-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0%;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: var(--background-main);
+  animation: show-reveal 0.5s ease-out 0.4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes show-reveal {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+    display: none;
+  }
+}
