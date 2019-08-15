@@ -1,17 +1,19 @@
 var vue = new Vue({
   el: '#app',
-  data: {
-    formOpen: false,
-    productData: {
-      title: '',
-      rating: '',
-      price: '',
-      list_price: '',
-      is_featured: false
+  data() {
+    return {
+      formOpen: false,
+      productData: {
+        title: '',
+        rating: '',
+        price: '',
+        list_price: '',
+        is_featured: false
+      }
     }
   },
   methods: {
-    resetForm: function () {
+    resetForm() {
       this.productData = {
         title: '',
         rating: '',
@@ -20,7 +22,7 @@ var vue = new Vue({
         is_featured: false
       }
     },
-    cancel: function() {
+    cancel() {
       this.formOpen = false;
       this.resetForm();
     }
