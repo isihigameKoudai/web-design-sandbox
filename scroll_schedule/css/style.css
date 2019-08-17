@@ -1,0 +1,158 @@
+:root {
+  --black: #333;
+  --gray: #cacaca;
+  --light-gray: #eee;
+  --white: #fdfdfd;
+  --font-white: #f0f0f0;
+  --red: #F44336;
+  --blue: #2196F3;
+  --green: #4CAF50;
+
+  --row-height: 64px;
+  --row-width: 136px;
+}
+
+html,
+body {
+  font-family: 'Archivo Black', sans-serif;
+}
+
+.title {
+  font-size: 3.0em;
+  letter-spacing: 1.2px;
+  margin: 1em 0;
+}
+
+.body-wrap {
+  padding: 0 20px;
+}
+
+.schedule {
+  width: 100%;
+  border: solid 1px var(--light-gray);
+}
+
+.schedule .hide-box {
+  width: 200px;
+  height: 60px;
+  background: var(--light-gray);
+}
+
+.schedule__header {
+  display: flex;
+  width: 100%;
+  border-bottom: solid 1px #eee;
+  filter: drop-shadow(0 1px 2px #ddd);
+}
+
+.header-view {
+  width: calc(100% - 200px);
+  overflow-x: scroll;
+  display: flex;
+}
+
+.header-view::-webkit-scrollbar {
+  display: none;
+}
+
+.schedule .header__col {
+  position: relative;
+  width: var(--row-width);
+  padding: 1.1em 40px;
+  font-size: 1.8em;
+  color: var(--black);
+  white-space: nowrap;
+  background: var(--white);
+  border: solid 1px var(--light-gray);
+}
+
+.schedule-container {
+  width: calc(100% - 200px);
+  overflow-x: scroll;
+  position: absolute;
+  left: 200px;
+
+}
+
+.schedule-content__row {
+  display: flex;
+  width: calc(24 * var(--row-width));
+  height: var(--row-height);
+  border: solid 1px var(--light-gray);
+}
+
+.schedule-content__col {
+  position: relative;
+  width: var(--row-width);
+  background: inherit;
+  border-right: solid 1px var(--light-gray);
+}
+
+.schedule-sidebar {
+  width: 200px;
+  border-right: solid 1px var(--light-gray);
+  filter: drop-shadow(0 1px 2px var(--light-gray));
+}
+
+.schedule-sidebar_row {
+  position: relative;
+  width: 100%;
+  height: var(--row-height);
+  padding: 10px 20px;
+  background-color: var(--white);
+  border: solid 1px 1px 0 1px var(--gray);
+  filter: drop-shadow(0 1px 2px var(--gray));
+}
+
+.schedule-sidebar_row__title {
+  font-size: 2.4em;
+  color: var(--black);
+}
+
+.schedule-sidebar_row__text {
+  font-size: 1.6em;
+  color: var(--gray);
+  margin-top: 4px;
+}
+
+.schedule__view {
+  position: relative;
+  overflow-y: scroll;
+  height: 500px;
+  width: 100%;
+  display: flex;
+}
+
+.reserve-item {
+  position: absolute;
+  padding: 10px;
+  height: var(--row-height);
+  border-radius: 8px;
+  letter-spacing: 0.6px;
+  line-height: 1.1;
+  color: var(--font-white);
+  font-family: helvetica, arial, 'hiragino kaku gothic pro', meiryo, 'ms pgothic', sans-serif;
+  filter: drop-shadow(2px 2px 2px var(--gray));
+}
+
+.reserve-item__name {
+  font-size: 2.4rem;
+}
+
+.reserve-item__num {
+  font-size: 1.8rem;
+  text-align: right;
+}
+
+.reserve-item.is-reserved {
+  background: var(--blue);
+}
+
+.reserve-item.is-arrived {
+  background: var(--green);
+}
+
+.reserve-item.is-exit {
+  background: var(--red);
+}
+

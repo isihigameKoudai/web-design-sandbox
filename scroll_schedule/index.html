@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="" />
+
+    <link rel="dns-prefetch" href="" />
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/setting.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<title>scrolle_schedule</title>
+	</head>
+	<body>
+		<div id="app" class="body-wrap">
+      <h1 class="title">Scroll Schedule</h1>
+      <div class="schedule">
+        <div class="schedule__header">
+          <div class="hide-box"></div>
+          <div class="header-view" ref="header-view">
+            <div
+              v-for="(time, i) in times"
+              :key="time"
+              class="header__col"
+            >{{time}}</div>
+          </div>
+        </div>
+        <div class="schedule__view">
+          <div class="schedule-sidebar">
+            <div
+              v-for="(table, i) in tables"
+              :key="'table' + i"
+              class="schedule-sidebar_row"
+            >
+              <p class="schedule-sidebar_row__title">{{table.name}}</p>
+              <p class="schedule-sidebar_row__text">{{table.id}}</p>
+            </div>
+          </div>
+          <div class="schedule-container" ref="schedule-container">
+            <div
+              v-for="(table, i) in tables"
+              :key="'table' + i"
+              class="schedule-content__row"
+            >
+              <div
+                v-for="(time, i) in times"
+                :key="'time' + i"
+                class="schedule-content__col"
+              ></div>
+            </div>
+            <div
+              v-for="(reserve, i) in reserves"
+              :key="'reserve' + i"
+              :style="rocateBy(reserve)"
+              :class="setClassNameBy(reserve.status)"
+              class="reserve-item"
+            >
+              <p class="reserve-item__name">{{reserve.customer.name}} 様</p>
+              <p class="reserve-item__num">{{reserve.customer.num}} 名</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="./script/script.js"></script>
+</html>
