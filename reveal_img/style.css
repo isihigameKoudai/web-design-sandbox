@@ -115,7 +115,7 @@ a {
 }
 
 
-/* reveal design  */
+/* reveal-box design  */
 
 :root {
   --ease-out: cubic-bezier(.19, 1, .22, 1);
@@ -136,28 +136,25 @@ a {
 
 .reveal-box.show .reveal-box-wrap {
   animation: reveal-effect-before 1s var(--ease-out) 0s both;
-  display: inline-block;
+  display: block;
   position: relative;
-  z-index: 0;
 }
 
 .reveal-box.show .reveal-box-wrap::before {
   animation: reveal-effect-after 1s var(--ease-out) 0.4s both;
   background: #333;
   content: '';
-  display: inline-block;
+  display: block;
   height: 100%;
   left: 0;
   position: absolute;
   top: 0;
   transform-origin: right;
   width: 100%;
-  z-index: 1;
 }
 
 .box-img {
   height: auto;
-  vertical-align: middle;
   width: 100%;
   object-fit: cover;
 }
