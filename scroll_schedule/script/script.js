@@ -95,6 +95,9 @@ new Vue({
       const $ScheduleContainer = this.$refs['schedule-container'];
       $ScheduleContainer.addEventListener('scroll', e => {
         $headerView.scrollLeft = e.target.scrollLeft;
+      });
+      $headerView.addEventListener('scroll', e => {
+        $ScheduleContainer.scrollLeft = e.target.scrollLeft;
       })
     },
     setClassNameBy(status) {
