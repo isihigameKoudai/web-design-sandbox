@@ -4,7 +4,7 @@
   height: 100vh;
 
   overflow: hidden;
-  -webkit-perspective: 1000px;
+  -webkit-perspective: 500px;
   perspective: 500px;
   transform-style: preserve-3d;
   -webkit-perspective-origin: 50% 50%;
