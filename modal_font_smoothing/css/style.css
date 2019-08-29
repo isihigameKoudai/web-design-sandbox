@@ -365,7 +365,7 @@
   font-family: "Yu Mincho",YuMincho,"Hiragino Minchō Pro","Hiragino Mincho Pro",serif;
   color: var(--white);
   font-size: 4.0rem;
-  padding: 9px 0;
+  padding: 0.9rem 0;
   transition-duration: 0.15s;
   font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;

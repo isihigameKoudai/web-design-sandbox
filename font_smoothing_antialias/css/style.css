@@ -1,0 +1,48 @@
+
+.text {
+  color: #222;
+  font-family: "Yu Mincho",YuMincho,"Hiragino Minchō Pro","Hiragino Mincho Pro",serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  padding: 0.8rem;
+}
+
+.text-roboto {
+  color: #222;
+  font-family: 'Roboto', sans-serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  padding: 0.8rem;
+}
+
+.text-lato {
+  color: #222;
+  font-family: 'Lato', sans-serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  padding: 0.8rem;
+}
+
+.text-work {
+  color: #222;
+  font-family: 'Work Sans', sans-serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  padding: 0.8rem;
+}
+
+.text-main {
+  font-size: 9.6rem;
+}
+
+.text-sub {
+  font-size: 6.0em;
+}
+
+.text-third {
+  font-size: 3.8rem;
+}
+
+.text-forth {
+  font-size: 2.4rem;
+}
