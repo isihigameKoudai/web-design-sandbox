@@ -1,0 +1,107 @@
+html,
+body {
+  height: 100%;
+  background: #0f0f0f;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+}
+
+.button {
+  color: #fcfcfa;
+  font-size: 3.6rem;
+}
+
+.fade-enter-active {
+  animation: hidden 0.3s ease-in-out reverse;
+}
+
+.fade-leave-active {
+  animation: hidden 0.3s ease-in-out;
+}
+
+@keyframes hidden {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes open {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes wide {
+  0% {
+    width: 10px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    height: 4px;
+    border-radius: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes open-page {
+  0% {
+    width: 100%;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    opacity: 1;
+  }
+}
+
+.open-anime {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  background: #fcfcfe;
+  border-radius: 50%;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation: open 0.3s ease 1s forwards;
+}
+
+.is-wide {
+  animation: wide 0.3s ease 0s forwards;
+}
+
+.is-open {
+  animation: open-page 0.3s ease 0s forwards;
+}
+
+.title-label {
+  font-size: 6.4rem;
+  color: #222;
+  font-family: 'Lato', sans-serif;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="" />
+
+		<link rel="dns-prefetch" href="" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/setting.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<title>open_from_dark</title>
+	</head>
+	<body>
+		<div id="app" class="container">
+      <transition name="fade">
+        <button
+          v-if="!isHidden"
+          :class="{ 'is-hidden': isHidden }"
+          type="button"
+          class="button"
+          @click="buttonPush"
+        >open</button>
+      </transition>
+
+      <div
+        v-show="isHidden"
+        :class="[{'is-wide': isWide},{'is-open': isOpen}]"
+        class="open-anime"
+      >
+        <div v-show="isHidden && isWide && isOpen" class="container hello-page">
+          <p class="title-label">Hello world</p>
+        </div>
+      </div>
+    </div>
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="./script/script.js"></script>
+</html>
