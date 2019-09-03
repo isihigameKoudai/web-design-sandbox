@@ -35,10 +35,9 @@
 
       <div
         v-show="isHidden"
-        :class="[{'is-wide': isWide},{'is-open': isOpen}]"
         class="open-anime"
       >
-        <div v-show="isHidden && isWide && isOpen" class="container hello-page">
+        <div v-show="isHidden" class="container hello-page">
           <p class="title-label">Hello world</p>
         </div>
       </div>

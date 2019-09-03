@@ -10,6 +10,10 @@ body {
   align-items: center;
   width: 100vw;
   height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .button {
@@ -80,8 +84,6 @@ body {
 
 .open-anime {
   position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
   width: 4px;
   height: 4px;
@@ -89,19 +91,13 @@ body {
   border-radius: 50%;
   opacity: 0;
   animation-fill-mode: forwards;
-  animation: open 0.3s ease 1s forwards;
-}
-
-.is-wide {
-  animation: wide 0.3s ease 0s forwards;
-}
-
-.is-open {
-  animation: open-page 0.3s ease 0s forwards;
+  animation: open 0.3s ease 1s forwards, wide 0.3s ease 1.3s forwards, open-page 0.5s ease 1.8s forwards;
 }
 
 .title-label {
   font-size: 6.4rem;
   color: #222;
   font-family: 'Lato', sans-serif;
+  opacity: 0;
+  animation: open 0.6s ease 2.3s forwards;
 }
