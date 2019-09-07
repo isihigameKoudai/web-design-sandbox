@@ -3,6 +3,8 @@ new Vue({
   el: '#app',
   data() {
     return {
+      isShown: false,
+      selectedReserve: {},
       times: [...new Array(24)].map((e, i) => {
         return `${i} : 00`
       }),
@@ -34,6 +36,7 @@ new Vue({
           name: 'huga',
           num: 5
         },
+        id: 1,
         time: '1:00',
         stay: 2,
         status: 'arrived',
@@ -43,6 +46,7 @@ new Vue({
           name: 'fuga',
           num: 1
         },
+        id: 2,
         time: '2:00',
         stay: 1,
         status: 'reserved',
@@ -52,6 +56,7 @@ new Vue({
           name: 'piyo',
           num: 1
         },
+        id: 3,
         time: '2:00',
         stay: 3,
         status: 'exit',
@@ -61,6 +66,7 @@ new Vue({
           name: 'fooo',
           num: 2
         },
+        id: 4,
         time: '4:00',
         stay: 2,
         status: 'reserved',
@@ -70,6 +76,7 @@ new Vue({
           name: 'bar',
           num: 4
         },
+        id: 5,
         time: '0:00',
         stay: 2,
         status: 'arrived',
@@ -79,11 +86,17 @@ new Vue({
           name: 'かめぽん',
           num: 2
         },
+        id: 6,
         time: '0:00',
         stay: 2,
         status: 'exit',
         table: '0007'
       }]
+    }
+  },
+  computed: {
+    selectedReserveId() {
+      return this.selectedReserve.id || '';
     }
   },
   mounted() {
@@ -108,11 +121,34 @@ new Vue({
       };
       return classList[status];
     },
-    rocateBy({time, stay, table}) {
+    locateBy({time, stay, table}) {
+      if  (!time || !stay || !table) return '';
       const width = stay * 136;
       const left = Number(time.split(':')[0]) * 136;
       const top = (Number(table.slice(-2)) - 1) * 64;
       return `top: ${top}px; left: ${left}px; width: ${width}px;`
+    },
+    // locateBySelectedReserve() {
+    //   const { offsetWidth: width, offsetHeight: height, offsetLeft: left } = this.$refs.modal;
+    //   const width = 200;
+    //   const height = 396;
+    //   const left = 0;
+    //   return `position: fixed; z-index: 110; top: ${top}px; left: ${left}px; width: ${width}px;`
+    // },
+    showModal() {
+      this.isShown = true;
+    },
+    closeModal() {
+      this.selectedReserve = {};
+      this.isShown = false;
+    },
+    onClickReserve(reserve) {
+      this.setReserve(reserve);
+      // this.locateBySelectedReserve();
+      this.showModal();
+    },
+    setReserve(reserve) {
+      this.selectedReserve = reserve;
     }
   }
 })

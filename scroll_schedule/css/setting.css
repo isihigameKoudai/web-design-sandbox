@@ -36,3 +36,9 @@ button,
 select {
   cursor: pointer;
 }
+
+a {
+  background: none;
+  color: inherit;
+  text-decoration: none;
+}

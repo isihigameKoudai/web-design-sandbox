@@ -62,9 +62,11 @@
             <div
               v-for="(reserve, i) in reserves"
               :key="'reserve' + i"
-              :style="rocateBy(reserve)"
-              :class="setClassNameBy(reserve.status)"
+              :style="locateBy(reserve)"
+              :class="[setClassNameBy(reserve.status), { 'is-selected': selectedReserveId === reserve.id}]"
+              :data-id="reserve.id"
               class="reserve-item"
+              @click="onClickReserve"
             >
               <p class="reserve-item__name">{{reserve.customer.name}} 様</p>
               <p class="reserve-item__num">{{reserve.customer.num}} 名</p>
@@ -72,8 +74,18 @@
           </div>
         </div>
       </div>
+      <!-- <transition name="fade">
+        <div v-show="isShown" class="modal">
+          <div class="modal__background" @click="closeModal"></div>
+          <div class="modal__content" ref="modal">
+            <div class="modal__content__main" :style="locateBy(selectedReserve)"></div>
+            <div class="modal__content__sub">aaaaa</div>
+          </div>
+        </div>
+      </transition> -->
     </div>
 	</body>
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <!-- <script src="./script/vue.min.js"></script> -->
 	<script src="./script/script.js"></script>
 </html>
