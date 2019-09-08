@@ -1,0 +1,146 @@
+body {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient( #efe4e9 30%, #d8c6b6 100%);
+  background-attachment: fixed;
+  font-family: 'Lato', sans-serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  --font-size-small: 1.6rem;
+  --font-size-normal: 2.4rem;
+  --font-size-large: 3.6rem;
+  --font-size-tiile: 4.8rem;
+  --white: #f9f9f9;
+  --gray: #ccc;
+  --light-gray: #aaa;
+  --black: #333;
+}
+
+.app-container {
+  padding-top: 76px;
+}
+
+.global-header {
+  position: fixed;
+  top: 0;;
+  left: 0;
+  width: 100%;
+  padding: 16px 24px;
+  backdrop-filter: blur(10px);
+  background: rgba(252, 252, 250, 0.2);
+}
+
+.global-header > .nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-box {
+  width: 100%;
+}
+
+.search-box__text {
+  width: calc(100% - 40px);
+  color: var(--black);
+  margin-left: 10px;
+}
+
+.search-box__text::placeholder {
+  color: var(--light-gray);
+}
+
+.text-large {
+  font-size: var(--font-size-large);
+}
+
+.text-normal {
+  font-size: var(--font-size-normal);
+}
+
+.text-small {
+  font-size: var(--font-size-small);
+}
+
+.section {
+  width: 960px;
+  padding: 50px 0 0;
+  margin: 0 auto;
+}
+
+.section__title {
+  font-size: var(--font-size-tiile);
+  font-family: Söhne,sans-serif;
+  font-weight: bold;
+  color: var(--black);
+}
+
+.card-continer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card-continer > .card {
+  margin-top: 50px;
+}
+
+.card {
+  width: 400px;
+  height: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: Söhne,sans-serif;
+}
+
+.card__header {
+  padding: 14px 24px;
+  line-height: 1.6rem;
+  font-size: 1.6rem;
+}
+
+.card.card-white {
+  background: var(--white);
+}
+
+.card.card-white .card__header {
+  background-color: #f2f2f3;
+}
+
+.card.card-blur {
+  background: rgba(252, 252, 250, 0.2);
+}
+
+.card.card-blur .card__header {
+  background: rgba(252, 252, 250, 0.4);
+}
+
+.card__main {
+  padding: 28px 20px 0;
+}
+
+.card__main-title {
+  color: var(--black);
+  font-family: Söhne,sans-serif;
+  font-size: var(--font-size-normal);
+  font-weight: bold;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 2.8rem;
+}
+
+.card__content {
+  line-height: 2rem;
+  font-size: 1.6rem;
+  letter-spacing: 1.2px;
+  color: #333;
+}
+
+.card__main > .card__content {
+  margin-top: 28px;
+}
