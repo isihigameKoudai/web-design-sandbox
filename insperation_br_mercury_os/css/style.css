@@ -17,6 +17,7 @@ body {
   --gray: #ccc;
   --light-gray: #aaa;
   --black: #333;
+  --border-card: #eee;
 }
 
 .app-container {
@@ -44,7 +45,7 @@ body {
 }
 
 .search-box__text {
-  width: calc(100% - 40px);
+  width: calc(100% - 44px);
   color: var(--black);
   margin-left: 10px;
 }
@@ -90,14 +91,15 @@ body {
 
 .card {
   width: 400px;
-  height: 450px;
+  min-height: 450px;
   border-radius: 12px;
+  padding-bottom: 28px;
   overflow: hidden;
   font-family: Söhne,sans-serif;
 }
 
 .card__header {
-  padding: 14px 24px;
+  padding: 14px 42px;
   line-height: 1.6rem;
   font-size: 1.6rem;
 }
@@ -119,7 +121,7 @@ body {
 }
 
 .card__main {
-  padding: 28px 20px 0;
+  padding: 28px 42px 0;
 }
 
 .card__main-title {
@@ -139,6 +141,29 @@ body {
   font-size: 1.6rem;
   letter-spacing: 1.2px;
   color: #333;
+}
+
+.card__content-inner {
+  width: 100%;
+  margin-top: 2.4rem;
+  padding: 0 0 2.4rem;
+  border-top: solid 1px var(--border-card);
+}
+
+.card__content-inner > .card-button {
+  margin-top: 17px;
+}
+
+.card__content-inner > .card-button:not(:first-child) {
+  margin-left: 7px;
+}
+
+.card-button {
+  padding: 14px 20px;
+  font-size: 1.2rem;
+  background: #eee;
+  border-radius: 14px;
+  color: var(--black);
 }
 
 .card__main > .card__content {
