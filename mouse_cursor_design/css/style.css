@@ -111,7 +111,6 @@ body {
   overflow: hidden;
   position: relative;
   background: repeating-linear-gradient(45deg, hsla(60,99%,40%,1), hsla(170,99%,41%,1), hsla(335,100%,41%,1), hsla(271,99%,33%,1)) 0 0/200% no-repeat;
-  mix-blend-mode: difference;
 }
 
 .img-wrap:hover img {
@@ -134,29 +133,17 @@ body {
   border: solid 1px var(--brand-main-color);
 }
 
-
-.label-reveal {
-  position: relative;
+.reveal-show {
+  clip-path: inset(0 100% 0 0);
+  animation: reveal-show 0.5s ease-in 0.3s forwards;
 }
 
-.label-reveal::after {
-  content: '';
-  position: absolute;
-  top: 0%;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  background: var(--background-main);
-  animation: show-reveal 0.5s ease-out 0.4s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes show-reveal {
+@keyframes reveal-show {
   0% {
-    width: 100%;
+    clip-path: inset(0 100% 0 0);
   }
   100% {
-    width: 0;
-    display: none;
+    clip-path: inset(0 0 0 0);
   }
 }
+
