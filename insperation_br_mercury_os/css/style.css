@@ -22,6 +22,7 @@ body {
 
 .app-container {
   padding-top: 76px;
+  padding-bottom: 80px;
 }
 
 .global-header {
@@ -79,15 +80,18 @@ body {
   color: var(--black);
 }
 
-.card-continer {
+.card-container {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  width: 100%;
+  overflow-x: scroll;
+  padding: 50px 0
 }
 
-.card-continer > .card {
+/* .card-container > .card {
   margin-top: 50px;
-}
+} */
 
 .card {
   width: 400px;
@@ -99,9 +103,15 @@ body {
 }
 
 .card__header {
+  display: flex;
+  align-items: center;
   padding: 14px 42px;
   line-height: 1.6rem;
   font-size: 1.6rem;
+}
+
+.card__header-title {
+  margin-left: 10px;
 }
 
 .card.card-white {
