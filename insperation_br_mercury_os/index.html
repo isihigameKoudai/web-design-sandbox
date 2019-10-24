@@ -24,7 +24,10 @@
 	</head>
 	<body>
 		<div id="app" class="app-container">
-      <header class="global-header">
+      <header
+        :class="{'is-focus': isFocus}"
+        class="global-header"
+      >
         <nav class="nav">
           <div class="search-box">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 48">
@@ -34,6 +37,27 @@
           </div>
           <span class="text-small time-text">22:40</span>
         </nav>
+        <transition name="fade">
+          <div
+            v-if="isFocus"
+            class="search-area"
+          >
+            <div class="list-area">
+
+            </div>
+            <div class="date-area">
+              <div class="date-cell"></div>
+            </div>
+            <ul class="menu-area">
+              <li
+                v-for="(menu, i) in menus"
+                :key="i"
+                :style="`animation-delay: ${i * 0.1 + 0.3}s`"
+                class="menu-list"
+              ><a :href="menu.path">{{menu.label}}</a></li>
+            </ul>
+          </div>
+        </transition>
       </header>
       <main>
         <article>
@@ -146,6 +170,9 @@
           </section>
         </article>
       </main>
+      <!-- <transition name="fade">
+        <div v-if="true" class="search-area">aaaaaaaa</div>
+      </transition> -->
     </div>
 	</body>
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
