@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   background: #0f0f0f;
+  font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
 }
 
 .container {
@@ -97,7 +98,7 @@ body {
 .title-label {
   font-size: 6.4rem;
   color: #222;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
   opacity: 0;
   animation: open 0.6s ease 2.3s forwards;
 }
