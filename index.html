@@ -13,41 +13,105 @@
 		<meta name="twitter:title" content="" />
 		<meta name="twitter:card" content="" />
 		<meta name="twitter:description" content="" />
-		<meta name="twitter:image" content="" />
+    <meta name="twitter:image" content="" />
 
-		<link rel="dns-prefetch" href="" />
+    <link rel="stylesheet" href="/module/css/reset.css">
+    <link rel="stylesheet" href="/module/css/style.css">
+    <style>
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        width: 960px;
+        height: auto;
+        margin: 0 auto;
+        padding: 100px 0;
+      }
+
+      .menu-item {
+        width: 150px;
+        height: 150px;
+        border: solid 1px #888;
+        margin: 10px 0 0 0;
+        padding: 10px;
+        overflow: hidden;
+        box-sizing: border-box;
+
+        letter-spacing: 1.4px;
+        color: #222;
+        text-decoration: none;
+        font-size: 24px;
+        word-break: break-all;
+        font-family: 'Lato', sans-serif;
+        font-feature-settings: "palt";
+        -webkit-font-smoothing: antialiased;
+        cursor: pointer;
+        transition-duration: 0.3s;
+      }
+
+      .menu-item:hover {
+        filter: drop-shadow(3px 3px 3px #aaa);
+      }
+
+    </style>
+    <link rel="dns-prefetch" href="" />
 		<title>web-design-sandbox</title>
 	</head>
 	<body>
 		<div id="app">
-      <ul>
-        <li><a href="/sakura/">sakura</a></li>
-        <li><a href="/reiwa/">reiwa</a></li>
-        <li><a href="/microInteraction/">microInteraction</a></li>
-        <li><a href="/paging_mask">paging-mask</a></li>
-        <li><a href="/navigations/">navigations</a></li>
-        <li><a href="/navigations_fiexd/">navigations_fiexd</a></li>
-        <li><a href="/scheduler/">scheduler</a></li>
-        <li><a href="/reveal_img/">reveal_img</a></li>
-        <li><a href="/navigation_tab/">navigation_tab</a></li>
-        <li><a href="/dark_theme/">dark_theme(prefers-color-scheme)</a></li>
-        <li><a href="/backdrop_filter/">backdrop_filter</a></li>
-        <li><a href="/water_ripples/">water_ripples</a></li>
-        <li><a href="/color_blend/">color_blend(mix-blend-mode, isolation)</a></li>
-        <li><a href="/mouse_cursor_design/">mouse_cursor_design(tweenmax, clip-path)</a></li>
-        <li><a href="/bubble_menu/">bubble_menu</a></li>
-        <li><a href="/scroll_schedule/">scroll_schedule</a></li>
-        <li><a href="/perspective_scroll_view/">perspective_scroll_view(cubic-bezier)</a></li>
-        <li><a href="/noise_text/">noise_text(clip rect)</a></li>
-        <li><a href="/modal_font_smoothing/">modal_font_smoothing(font-feature-settings,-webkit-font-smoothing)</a></li>
-        <li><a href="/font_smoothing_antialias/">font_smoothing_antialias</a></li>
-        <li><a href="/open_from_dark/">open_from_dark</a></li>
-        <li><a href="/scroll_pregressive_bar/">scroll_pregressive_bar</a></li>
-        <li><a href="/insperation_br_mercury_os/">insperation_br_mercury_os</a></li>
-        <li><a href="/scroll_snap/">scroll_snap</a></li>
-        <li><a href="/sommth_page_transition/">sommth_page_transition</a></li>
+      <ul class="container">
+        <li
+          v-for="(v, i) in menus"
+          :key="i"
+          class="menu-item"
+          @click="onMoveTo(v.path)"
+        >{{ v.title }}</li>
       </ul>
     </div>
-	</body>
-	<script src="./script.js"></script>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const menus = [
+      { path: 'sakura/', title: 'sakura' },
+      { path: 'reiwa/', title: 'reiwa' },
+      { path: 'microInteraction/', title: 'microInteraction' },
+      { path: 'paging_mask/', title: 'paging-mask' },
+      { path: 'navigations/', title: 'navigations' },
+      { path: 'navigations_fiexd/', title: 'navigations_fiexd' },
+      { path: 'scheduler/', title: 'scheduler' },
+      { path: 'reveal_img/', title: 'reveal_img' },
+      { path: 'navigation_tab/', title: 'navigation_tab' },
+      { path: 'dark_theme/', title: 'dark_theme(prefers-color-scheme)' },
+      { path: 'backdrop_filter/', title: 'backdrop_filter' },
+      { path: 'water_ripples/', title: 'water_ripples' },
+      { path: 'color_blend/', title: 'color_blend(mix-blend-mode, isolation)' },
+      { path: 'mouse_cursor_design/', title: 'mouse_cursor_design(tweenmax, clip-path)' },
+      { path: 'bubble_menu/', title: 'bubble_menu' },
+      { path: 'scroll_schedule/', title: 'scroll_schedule' },
+      { path: 'perspective_scroll_view/', title: 'perspective_scroll_view(cubic-bezier)' },
+      { path: 'noise_text/', title: 'noise_text(clip rect)' },
+      { path: 'modal_font_smoothing/', title: 'modal_font_smoothing(font-feature-settings,-webkit-font-smoothing)' },
+      { path: 'font_smoothing_antialias/', title: 'font_smoothing_antialias' },
+      { path: 'open_from_dark/', title: 'open_from_dark' },
+      { path: 'scroll_pregressive_bar/', title: 'scroll_pregressive_bar' },
+      { path: 'insperation_br_mercury_os/', title: 'insperation_br_mercury_os' },
+      { path: 'scroll_snap/', title: 'scroll_snap' },
+      { path: 'sommth_page_transition/', title: 'sommth_page_transition' }
+    ]
+    const onMoveTo = ( path = '/') => location.assign(path)
+
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          menus
+        }
+      },
+      methods: {
+        onMoveTo
+      }
+    })
+  </script>
 </html>
