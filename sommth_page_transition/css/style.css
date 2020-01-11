@@ -1,11 +1,21 @@
 body {
-  animation: fadeIn 2s ease 0s 1 normal;
-  -webkit-animation: fadeIn 2s ease 0s 1 normal;
+  opacity: 0;
+  animation: fadeIn 0.9s ease 0s 1 forwards;
+  -webkit-animation: fadeIn 0.9s ease 0s 1 forwards;
+}
+
+.is-move {
+  animation: fadeOut 0.5s ease 0s;
 }
 
 @keyframes fadeIn {
   0% {opacity: 0}
   100% {opacity: 1}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1}
+  100% {opacity: 0}
 }
 
 .container {
