@@ -1,10 +1,22 @@
+const initialReserve = () => ({
+  customer: {
+    name: '',
+    num: 0
+  },
+  id: 0,
+  time: '1:00',
+  stay: 0,
+  status: '',
+  table: ''
+});
 
 new Vue({
   el: '#app',
   data() {
     return {
       isShown: false,
-      selectedReserve: {},
+      selectedReserve: initialReserve(),
+      selected: {},
       times: [...new Array(24)].map((e, i) => {
         return `${i} : 00`
       }),
@@ -103,6 +115,33 @@ new Vue({
     this.setEventListener();
   },
   methods: {
+    console(e) {
+      const { x, y, offsetX, offsetY, clientX, clientY } = e;
+      console.log('x: ' + x, 'y: ' + y, 'offsetX: ' + offsetX, 'offsetY: ' + offsetY, 'clientX: ' + clientX, 'clientY: ' + clientY);
+    },
+    onDrag(e) {
+      if(!(e.x || e.y || e.screenX || e.screenY || e.clientX || e.clientX)) return;
+      // console.log(e);
+
+      const currentLeft = `${e.x + e.offsetX * 2}px`;
+      const currentTop = `${e.y + e.offsetY * 2}px`;
+      // const currentLeft = `${e.x + e.offsetX}px`;
+      // const currentTop = `${e.y + e.offsetY}px`;
+      this.console(e);
+      e.target.style.top = currentTop;
+      e.target.style.left = currentLeft;
+      e.target.style.opacity = 1;
+    },
+    onDragStart(e) {
+      console.log('start');
+      this.selected.x = e.offsetX;
+      this.selected.y = e.offsetY;
+      e.target.style.opacity = 0;
+    },
+    onDragEnd(e) {
+      console.log('end');
+      e.target.style.opacity = 1;
+    },
     setEventListener() {
       const $headerView = this.$refs['header-view'];
       const $ScheduleContainer = this.$refs['schedule-container'];
@@ -139,12 +178,11 @@ new Vue({
       this.isShown = true;
     },
     closeModal() {
-      this.selectedReserve = {};
+      this.selectedReserve = initialReserve();
       this.isShown = false;
     },
     onClickReserve(reserve) {
       this.setReserve(reserve);
-      // this.locateBySelectedReserve();
       this.showModal();
     },
     setReserve(reserve) {

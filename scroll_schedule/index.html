@@ -66,7 +66,11 @@
               :class="[setClassNameBy(reserve.status), { 'is-selected': selectedReserveId === reserve.id}]"
               :data-id="reserve.id"
               class="reserve-item"
-              @click="onClickReserve"
+              @drag="onDrag"
+              @dragstart="onDragStart"
+              @dragend="onDragEnd"
+              @click="onClickReserve(reserve)"
+              draggable="true"
             >
               <p class="reserve-item__name">{{reserve.customer.name}} 様</p>
               <p class="reserve-item__num">{{reserve.customer.num}} 名</p>
@@ -74,18 +78,23 @@
           </div>
         </div>
       </div>
-      <!-- <transition name="fade">
+      <transition name="fade">
         <div v-show="isShown" class="modal">
           <div class="modal__background" @click="closeModal"></div>
           <div class="modal__content" ref="modal">
-            <div class="modal__content__main" :style="locateBy(selectedReserve)"></div>
+            <div
+              :class="setClassNameBy(selectedReserve.status)"
+              class="modal__content__main"
+            >
+              <h2>{{ selectedReserve.customer.name }}</h2>
+          </div>
             <div class="modal__content__sub">aaaaa</div>
           </div>
         </div>
-      </transition> -->
+      </transition>
     </div>
 	</body>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <!-- <script src="./script/vue.min.js"></script> -->
 	<script src="./script/script.js"></script>
 </html>
