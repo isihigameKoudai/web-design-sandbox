@@ -53,7 +53,7 @@ class AudioVisualizer {
   setVisualizer(audioBuffer) {
     // Visualizerの設定
     this.sourceNode = this.ctx.createBufferSource();  // AudioBufferSourceNodeを作成
-    this.sourceNode.buffer = audioBuffer;                  // 取得した音声データ(バッファ)を音源に設定
+    this.sourceNode.buffer = audioBuffer;             // 取得した音声データ(バッファ)を音源に設定
     this.analyserNode = this.ctx.createAnalyser();    // AnalyserNodeを作成
     this.times = new Uint8Array(this.analyserNode.frequencyBinCount);  // 時間領域の波形データを格納する配列を生成
     this.sourceNode.connect(this.analyserNode);       // AudioBufferSourceNodeをAnalyserNodeに接続
