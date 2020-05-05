@@ -71,103 +71,159 @@ const createVbo = function(gl, array, usage) {
 ////////////////////////////////////////////
 class MicVisualizer {
   constructor() {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    this.AudioContext = new AudioContext();
-    this.stream = null;
-    this.input = null;
-    this.analyser = null;
-
-    this.$canvas = null;
     this.$gl = null;
+    this.$canvas = null;
+    this.analyzer = null;
+    this.program = null;
+    this.input = null;
+    this.uniformLocs = null;
+    this.timeDomainArray = null;
+    this.frequencyArray = null;
+    this.timeDomainVbo = null;
+    this.frequencyVbo = null;
     this.requestId = null;
-    this.uniformLocs = {};
 
-    this.visualizerOption = {
-      timeDomainArray: new Float32Array(),
-      frequencyArray: new Float32Array(),
-      timeDomainVbo: null,
-      frequencyVbo: null
-    }
-    console.log(this.visualizerOption);
-    // this.init();
-  }
-
-  async init() {
-    this.stream = await navigator.mediaDevices.getUserMedia({audio: true});
-    this.input = this.AudioContext.createMediaStreamSource(this.stream);
-    this.analyser = this.AudioContext.createAnalyser();
-    this.input.connect(this.analyser);
+    // requestAnimationFrameの各ブラウザ対応
+    const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    window.requestAnimationFrame = requestAnimationFrame;
   }
 
   /**
-   *
-   * @param {object} option ビジュアライズする時に必要なオプション
-   * @param {string} option.target ビジュアライズのターゲットDOM指定
+   * @param {String?} target canvasのターゲット
    */
-  draw({ target = '#canvas'}) {
-    this.$canvas = document.querySelector(target);
-    this.$canvas.width = window.innerWidth;
-    this.$canvas.height = window.innerHeight;
+  async createInitialContext(target = '#canvas') {
+    // AudioContextの作成
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+    // getUserMediaでマイクを有効化、マイクオーディオをソースとして登録
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    const input  = audioCtx.createMediaStreamSource(stream);
+    // AnalyserNode（音声の時間と周波数を解析、音声の可視化に使用）の生成
+    const analyzer = audioCtx.createAnalyser();
 
-    this.$gl = this.$canvas.getContext('webgl2');
-    this.$gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    // 表示用canvasの設定
+    const canvas = document.querySelector(target);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // webglを有効化と画面初期化
+    const gl = canvas.getContext('webgl2');
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-    this.program = createProgram(this.$gl,
-      createShader(this.$gl, renderLineVertex, this.$gl.VERTEX_SHADER),
-      createShader(this.$gl, renderLineFragment, this.$gl.FRAGMENT_SHADER)
+    const program = createProgram(gl,
+      createShader(gl, renderLineVertex, gl.VERTEX_SHADER),
+      createShader(gl, renderLineFragment, gl.FRAGMENT_SHADER)
     );
-    this.uniformLocs = getUniformLocs(this.$gl, this.program, ['u_length', 'u_minValue', 'u_maxValue', 'u_color']);
 
-    this.visualizerOption.timeDomainArray = new Float32Array(this.analyser.fftSize);
-    this.visualizerOption.frequencyArray = new Float32Array(this.analyser.frequencyBinCount);
-    this.visualizerOption.timeDomainVbo = createVbo(this.$gl, this.visualizerOption.timeDomainArray, this.$gl.DYNAMIC_DRAW);
-    this.visualizerOption.frequencyVbo = createVbo(this.$gl, this.visualizerOption.frequencyArray, this.$gl.DYNAMIC_DRAW);
+    const uniformLocs = getUniformLocs(gl, program, ['u_length', 'u_minValue', 'u_maxValue', 'u_color']);
+
+    const timeDomainArray = new Float32Array(analyzer.fftSize);
+    const frequencyArray = new Float32Array(analyzer.frequencyBinCount);
+    const timeDomainVbo = createVbo(gl, timeDomainArray, gl.DYNAMIC_DRAW);
+    const frequencyVbo = createVbo(gl, frequencyArray, gl.DYNAMIC_DRAW);
+
+    return {
+      audioCtx,
+      stream,
+      input,
+      analyzer,
+      canvas,
+      gl,
+      program,
+      uniformLocs,
+      timeDomainArray,
+      frequencyArray,
+      timeDomainVbo,
+      frequencyVbo
+    }
   }
 
   /**
-   *
+   * マイクをONにする
+   */
+  async play() {
+    const {
+      input,
+      analyzer,
+      gl,
+      canvas,
+      program,
+      uniformLocs,
+      timeDomainArray,
+      frequencyArray,
+      timeDomainVbo,
+      frequencyVbo
+    } = await this.createInitialContext();
+
+    this.$gl = gl;
+    this.$canvas = canvas;
+    this.analyzer = analyzer;
+    this.program = program;
+    this.input = input;
+    this.uniformLocs = uniformLocs;
+    this.timeDomainArray = timeDomainArray;
+    this.frequencyArray = frequencyArray;
+    this.timeDomainVbo = timeDomainVbo;
+    this.frequencyVbo = frequencyVbo;
+
+    input.connect(analyzer);
+
+    this.requestId = window.requestAnimationFrame(this.render.bind(this));
+  }
+
+  /**
+   * 指定されたシェーダーを画面に描画する
    */
   render() {
-    this.$gl.clear(this.$gl.COLOR_BUFFER_BIT);
+    const {
+      analyzer,
+      $gl,
+      program,
+      uniformLocs,
+      timeDomainArray,
+      frequencyArray,
+      timeDomainVbo,
+      frequencyVbo
+    } = this;
 
-    this.analyser.getFloatTimeDomainData(this.visualizerOption.timeDomainArray);
-    this.$gl.bindBuffer(this.$gl.ARRAY_BUFFER, this.visualizerOption.timeDomainVbo);
-    this.$gl.bufferSubData(this.$gl.ARRAY_BUFFER, 0, this.visualizerOption.timeDomainArray);
+    $gl.clear($gl.COLOR_BUFFER_BIT);
 
-    this.$gl.useProgram(this.program);
-    this.$gl.uniform1f(this.uniformLocs.get('u_length'), this.visualizerOption.timeDomainArray.length);
-    this.$gl.uniform1f(this.uniformLocs.get('u_minValue'), -1.0);
-    this.$gl.uniform1f(this.uniformLocs.get('u_maxValue'), 1.0);
-    this.$gl.uniform3f(this.uniformLocs.get('u_color'), 1.0, 0.0, 0.0);
-    this.$gl.bindBuffer(this.$gl.ARRAY_BUFFER, this.visualizerOption.timeDomainVbo);
-    this.$gl.enableVertexAttribArray(0);
-    this.$gl.vertexAttribPointer(0, 1, this.$gl.FLOAT, false, 0, 0);
-    this.$gl.drawArrays(this.$gl.LINE_STRIP, 0, this.visualizerOption.timeDomainArray.length);
+    analyzer.getFloatTimeDomainData(timeDomainArray);
+    $gl.bindBuffer($gl.ARRAY_BUFFER, timeDomainVbo);
+    $gl.bufferSubData($gl.ARRAY_BUFFER, 0, timeDomainArray);
 
-    this.analyser.getFloatFrequencyData(this.visualizerOption.frequencyArray);
-    this.$gl.bindBuffer(this.$gl.ARRAY_BUFFER, this.visualizerOption.frequencyVbo);
-    this.$gl.bufferSubData(this.$gl.ARRAY_BUFFER, 0, this.visualizerOption.frequencyArray);
+    $gl.useProgram(program);
+    $gl.uniform1f(uniformLocs.get('u_length'), timeDomainArray.length);
+    $gl.uniform1f(uniformLocs.get('u_minValue'), -1.0);
+    $gl.uniform1f(uniformLocs.get('u_maxValue'), 1.0);
+    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, 0.0, 0.0);
+    $gl.bindBuffer($gl.ARRAY_BUFFER, timeDomainVbo);
+    $gl.enableVertexAttribArray(0);
+    $gl.vertexAttribPointer(0, 1, $gl.FLOAT, false, 0, 0);
+    $gl.drawArrays($gl.LINE_STRIP, 0, timeDomainArray.length);
 
-    this.$gl.uniform1f(this.uniformLocs.get('u_length'), this.visualizerOption.frequencyArray.length);
-    this.$gl.uniform1f(this.uniformLocs.get('u_minValue'), this.analyser.minDecibels);
-    this.$gl.uniform1f(this.uniformLocs.get('u_maxValue'), this.analyser.maxDecibels);
-    this.$gl.uniform3f(this.uniformLocs.get('u_color'), 0.0, 0.0, 1.0);
-    this.$gl.bindBuffer(this.$gl.ARRAY_BUFFER, this.visualizerOption.frequencyVbo);
-    this.$gl.enableVertexAttribArray(0);
-    this.$gl.vertexAttribPointer(0, 1, this.$gl.FLOAT, false, 0, 0);
-    this.$gl.drawArrays(this.$gl.LINE_STRIP, 0, this.visualizerOption.frequencyArray.length);
+    analyzer.getFloatFrequencyData(frequencyArray);
+    $gl.bindBuffer($gl.ARRAY_BUFFER, frequencyVbo);
+    $gl.bufferSubData($gl.ARRAY_BUFFER, 0, frequencyArray);
 
-    this.requestId = requestAnimationFrame(this.render);
+    $gl.uniform1f(uniformLocs.get('u_length'), frequencyArray.length);
+    $gl.uniform1f(uniformLocs.get('u_minValue'), analyzer.minDecibels);
+    $gl.uniform1f(uniformLocs.get('u_maxValue'), analyzer.maxDecibels);
+    $gl.uniform3f(uniformLocs.get('u_color'), 0.0, 0.0, 1.0);
+    $gl.bindBuffer($gl.ARRAY_BUFFER, frequencyVbo);
+    $gl.enableVertexAttribArray(0);
+    $gl.vertexAttribPointer(0, 1, $gl.FLOAT, false, 0, 0);
+    $gl.drawArrays($gl.LINE_STRIP, 0, frequencyArray.length);
+
+    window.requestAnimationFrame(this.render.bind(this));
   }
 
+  /**
+   * windowのサイズが変更されたときにcanvasのリサイズ処理をかける
+   */
   resize() {
-    if (this.requestId != null) {
-      cancelAnimationFrame(this.requestId);
-    }
     this.$canvas.width = window.innerWidth;
     this.$canvas.height = window.innerHeight;
-    this.$gl.viewport(0.0, 0.0, this.$canvas.width, this.$canvas.height);
-    this.requestId = requestAnimationFrame(this.render);
+    window.requestAnimationFrame(this.render.bind(this));
   }
 }
 
