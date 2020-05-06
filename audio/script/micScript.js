@@ -13,3 +13,7 @@ clickElem.addEventListener('click', async () => {
   clickElem.remove();
   visualizer.play();
 });
+
+document.addEventListener('', () => {
+  visualizer.resize();
+});

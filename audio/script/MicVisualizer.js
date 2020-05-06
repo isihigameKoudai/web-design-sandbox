@@ -27,6 +27,7 @@ void main(void) {
 }
 `;
 
+// シェーダーのソースコードをWebGLに適用させる
 const createShader = function(gl, source, type) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
@@ -83,6 +84,19 @@ class MicVisualizer {
     this.frequencyVbo = null;
     this.requestId = null;
 
+    this.colors = {
+      vert: {
+        r: 0.0,
+        g: 0.5,
+        b: 1.0
+      },
+      center: {
+        r: 1.0,
+        g: 0.5,
+        b: 0.0
+      }
+    }
+
     // requestAnimationFrameの各ブラウザ対応
     const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
@@ -114,6 +128,7 @@ class MicVisualizer {
       createShader(gl, renderLineFragment, gl.FRAGMENT_SHADER)
     );
 
+    // シェーダー側の変数に送る情報の設定をする
     const uniformLocs = getUniformLocs(gl, program, ['u_length', 'u_minValue', 'u_maxValue', 'u_color']);
 
     const timeDomainArray = new Float32Array(analyzer.fftSize);
@@ -195,7 +210,9 @@ class MicVisualizer {
     $gl.uniform1f(uniformLocs.get('u_length'), timeDomainArray.length);
     $gl.uniform1f(uniformLocs.get('u_minValue'), -1.0);
     $gl.uniform1f(uniformLocs.get('u_maxValue'), 1.0);
-    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, 0.0, 0.0);
+
+    this.colors.center.b = ( this.colors.center.b + 0.01 ) % 1.0;
+    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, 0.3, this.colors.center.b);
     $gl.bindBuffer($gl.ARRAY_BUFFER, timeDomainVbo);
     $gl.enableVertexAttribArray(0);
     $gl.vertexAttribPointer(0, 1, $gl.FLOAT, false, 0, 0);
@@ -208,7 +225,9 @@ class MicVisualizer {
     $gl.uniform1f(uniformLocs.get('u_length'), frequencyArray.length);
     $gl.uniform1f(uniformLocs.get('u_minValue'), analyzer.minDecibels);
     $gl.uniform1f(uniformLocs.get('u_maxValue'), analyzer.maxDecibels);
-    $gl.uniform3f(uniformLocs.get('u_color'), 0.0, 0.0, 1.0);
+
+    this.colors.vert.g = ( this.colors.vert.g + 0.01 ) % 1.0;
+    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, this.colors.vert.g, 0.2);
     $gl.bindBuffer($gl.ARRAY_BUFFER, frequencyVbo);
     $gl.enableVertexAttribArray(0);
     $gl.vertexAttribPointer(0, 1, $gl.FLOAT, false, 0, 0);
