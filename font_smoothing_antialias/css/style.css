@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'cereal';
+  src: url("../fonts/airbnb_cereal/AirbnbCerealLight.ttf");
+}
+
 
 .text {
   color: #222;
@@ -26,6 +31,14 @@
 .text-work {
   color: #222;
   font-family: 'Work Sans', sans-serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  padding: 0.8rem;
+}
+
+.text-cereal {
+  color: #222;
+  font-family: 'cereal', sans-serif;
   font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;
   padding: 0.8rem;
