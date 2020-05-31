@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="/module/css/reset.css">
     <link rel="stylesheet" href="/module/css/style.css">
     <style>
+      a {
+        text-decoration: none;
+      }
+
       .container {
         display: flex;
         justify-content: space-between;
@@ -31,8 +35,9 @@
       }
 
       .menu-item {
-        width: 150px;
-        height: 150px;
+        width: 100%;
+        height: auto;
+        /* aspect-ratio: 1/1; */
         border: solid 1px #888;
         margin: 10px 0 0 0;
         padding: 10px;
@@ -51,6 +56,11 @@
         transition-duration: 0.3s;
       }
 
+      .menu-item.box {
+        width: 150px;
+        height: 150px;
+      }
+
       .menu-item:hover {
         filter: drop-shadow(3px 3px 3px #aaa);
       }
@@ -61,11 +71,16 @@
 	</head>
 	<body>
 		<div id="app">
+      <div class="container">
+        <div class="menu-item">
+          <a class="/_CREATIVE/" href="/_CREATIVE">CREATIVE</a>
+        </div>
+      </div>
       <ul class="container">
         <li
           v-for="(v, i) in menus"
           :key="i"
-          class="menu-item"
+          class="menu-item box"
           @click="onMoveTo(v.path)"
         >{{ v.title }}</li>
       </ul>
