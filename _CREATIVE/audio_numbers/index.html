@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="" />
+
+		<link rel="dns-prefetch" href="" />
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/setting.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<title>audio</title>
+	</head>
+	<body>
+		<div id="app">
+      <button class="button">start</button>
+      <div class="container">
+        <div v-for="(item, i) in graphs" class="num-item" :style="`color: rgb(${255 - i * 2.5}, ${ Math.abs(128 - item) * 10 }, ${i * 2.5}); transform: translate3d(${Math.abs((128 - item) / 2)}px, ${Math.abs((128 - item) / 2)}px, 0);`">{{ item }}</div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: () => ({
+          graphs: []
+        })
+      });
+
+
+      // canvas要素の取得
+      // const $canvas = document.querySelector('#canvas');
+      // $canvas.width = window.innerWidth;
+      // $canvas.height = window.innerHeight;
+      // // canvas要素からWebGLを取得
+      // const gl = canvas.getContext('webgl2');
+      // gl.clearColor(0.0, 0.0, 0.0, 1.0);
+      // gl.fillStyle = 'rgb(16, 16, 24)';
+      // gl.lineWidth = 2;
+      // gl.strokeStyle = 'rgb(124, 224, 255)';
+      // gl.fillRect(0, 0, canvas.width, canvas.height);
+
+      const $button = document.querySelector('.button');
+      $button.addEventListener('click', async () => {
+        const AudioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+
+        // 音声可視化の設定・AnalyserNodaの生成
+        const analyser = AudioContext.createAnalyser();
+        // console.log(analyser.fftSize, analyser.frequencyBinCount, analyser.smoothingTimeConstant);
+        const dataArray = new Uint8Array(analyser.fftSize);
+        analyser.getByteTimeDomainData(dataArray);
+
+        // マイクから集音した音をFFT（高速フーリエ変換）にいれる
+        const audioSource = AudioContext.createMediaStreamSource(stream);
+        audioSource.connect(analyser);
+
+        // requestAnimationFrameの各ブラウザ対応
+        const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+        window.requestAnimationFrame = requestAnimationFrame;
+
+        const draw = () => {
+
+          var dataArray = new Uint8Array(100);
+          // var dataArray = new Uint8Array(analyser.fftSize);
+          // dataArrayが解析されたデータで満たされる
+          analyser.getByteTimeDomainData(dataArray);
+
+          // 取得した音声配列をVueのdataにセット
+          const parseGraph = dataArray.map( item => String(item) );
+          Vue.set(app, 'graphs', parseGraph)
+
+          // クラスメソッドの場合は window.requestAnimationFrame(this.draw.bind(this)); の様になる
+          drawVisual = window.requestAnimationFrame(draw);
+        }
+
+        draw();
+        $button.style.display = 'none';
+      });
+  </script>
+	</body>
+</html>
+

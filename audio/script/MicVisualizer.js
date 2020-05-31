@@ -211,8 +211,9 @@ class MicVisualizer {
     $gl.uniform1f(uniformLocs.get('u_minValue'), -1.0);
     $gl.uniform1f(uniformLocs.get('u_maxValue'), 1.0);
 
-    this.colors.center.b = ( this.colors.center.b + 0.01 ) % 1.0;
-    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, 0.3, this.colors.center.b);
+    this.colors.center.b = this.colors.center.b + 0.01;
+
+    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, 0.3, Math.sin(this.colors.center.b));
     $gl.bindBuffer($gl.ARRAY_BUFFER, timeDomainVbo);
     $gl.enableVertexAttribArray(0);
     $gl.vertexAttribPointer(0, 1, $gl.FLOAT, false, 0, 0);
@@ -226,8 +227,8 @@ class MicVisualizer {
     $gl.uniform1f(uniformLocs.get('u_minValue'), analyzer.minDecibels);
     $gl.uniform1f(uniformLocs.get('u_maxValue'), analyzer.maxDecibels);
 
-    this.colors.vert.g = ( this.colors.vert.g + 0.01 ) % 1.0;
-    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, this.colors.vert.g, 0.2);
+    this.colors.vert.g = this.colors.vert.g + 0.1;
+    $gl.uniform3f(uniformLocs.get('u_color'), 1.0, Math.sin(this.colors.vert.g), Math.cos(this.colors.vert.b));
     $gl.bindBuffer($gl.ARRAY_BUFFER, frequencyVbo);
     $gl.enableVertexAttribArray(0);
     $gl.vertexAttribPointer(0, 1, $gl.FLOAT, false, 0, 0);
