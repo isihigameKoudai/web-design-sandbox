@@ -1,11 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div id="creative">hello</div>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      a {
+        text-decoration: none;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        width: 960px;
+        height: auto;
+        margin: 0 auto;
+        padding: 100px 0;
+      }
+
+      .menu-item {
+        width: 100%;
+        height: auto;
+        /* aspect-ratio: 1/1; */
+        border: solid 1px #888;
+        margin: 10px 0 0 0;
+        padding: 10px;
+        overflow: hidden;
+        box-sizing: border-box;
+
+        letter-spacing: 1.4px;
+        color: #222;
+        text-decoration: none;
+        font-size: 24px;
+        word-break: break-all;
+        font-family: 'Lato', sans-serif;
+        font-feature-settings: "palt";
+        -webkit-font-smoothing: antialiased;
+        cursor: pointer;
+        transition-duration: 0.3s;
+      }
+
+      .menu-item.box {
+        width: 150px;
+        height: 150px;
+      }
+
+      .menu-item:hover {
+        filter: drop-shadow(3px 3px 3px #aaa);
+      }
+
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="creative">
+      <ul class="container">
+        <li
+          v-for="(v, i) in menus"
+          :key="i"
+          class="menu-item box"
+          @click="onMoveTo(v.path)"
+        >{{ v.title }}</li>
+      </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const menus = [{
+        title: 'audio_numbers',
+        path: './audio_numbers'
+      },{
+        title: 'inspiration_br_mercury_os',
+        path: './inspiration_br_mercury_os'
+      },{
+        title: 'reiwa',
+        path: './reiwa'
+      },{
+        path: 'modal_font_smoothing/',
+        title: 'modal_font_smoothing(font-feature-settings,-webkit-font-smoothing)'
+      }];
+
+      const onMoveTo = ( path = '/') => location.assign(path)
+
+      new Vue({
+        data: () => ({
+          menus
+        }),
+        methods: {
+          onMoveTo
+        }
+      }).$mount('#creative');
+
+    </script>
+  </body>
 </html>
