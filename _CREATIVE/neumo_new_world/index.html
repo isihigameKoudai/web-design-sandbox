@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+      }
+
+      .container {
+        display: grid;
+        grid-template: 1fr 1fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        width: 100%;
+        height: 100%;
+        background: #e8e8e8;
+      }
+
+      .box {
+        transition-duration: 1.0s;
+        border-radius: 30px;
+        box-shadow:  0px 0px 0px #c5c5c5,
+                    0px 0px 0px #ffffff;
+      }
+
+      .box:hover {
+        background: #e8e8e8;
+        box-shadow:  20px 20px 60px #c5c5c5,
+                    -20px -20px 60px #ffffff;
+      }
+    </style>
+    <title>neumo_new_world</title>
+  </head>
+  <body>
+    <div id="neumorphism" class="container">
+      <div v-for="i in box" :key="i" class="box"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        data: () => ({
+          box: [...new Array(100)].map((_, i) => i)
+        })
+      }).$mount('#neumorphism');
+
+    </script>
+  </body>
+</html>
