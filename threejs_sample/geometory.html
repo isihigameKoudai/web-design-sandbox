@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="" />
+
+		<link rel="dns-prefetch" href="" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/setting.css" />
+    <style>
+      .button {
+        padding: 14px;
+        font-size: 16px;
+      }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+		<title>threejs_sample</title>
+	</head>
+	<body>
+    <div id="app">
+      <canvas id="canvas"></canvas>
+      <footer class="footer">
+        <ul>
+          <li class="list"><a href="./">マテリアルとライティング</a></li>
+          <li class="list"><a href="./geometory.html">ジオメトリ</a></li>
+        </ul>
+      </footer>
+    </div>
+    <script>
+      (() => {
+        const width = 960;
+        const height = 540;
+
+        const renderer = new THREE.WebGLRenderer({
+          canvas: document.querySelector('#canvas')
+        });
+
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+
+        // シーンの追加
+        const scene = new THREE.Scene();
+
+        // カメラの作成
+        const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+        camera.position.set(0, 0, +1000);
+        let rot = 0
+
+        // ①ジオメトリを作成（ジオメトリはいくつか形がある）
+        // const geometry = new THREE.SphereGeometry(300, 30, 30);
+        // const geometry = new THREE.BoxGeometry( 300, 300, 300 );
+        // const geometry = new THREE.PlaneGeometry( 300, 300, 300 );
+        // const geometry = new THREE.ConeGeometry( 200, 300, 32 );
+        // const geometry = new THREE.CylinderGeometry( 100, 100, 300, 64 );
+        const geometry = new THREE.TorusGeometry( 100, 30, 160, 1000 );
+
+        // const geometry = new THREE.SphereGeometry( 5, 32, 32 );
+        // マテリアルを作成
+        const material = new THREE.MeshNormalMaterial();
+        // メッシュを作成
+        const mesh = new THREE.Mesh(geometry, material);
+        // 3D空間にメッシュを追加
+        scene.add(mesh);
+
+        const render = () => {
+          // カメラの回転
+          rot++;
+          const radian = rot * Math.PI / 180;
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+          // 角度に応じてカメラの位置を設定
+          camera.position.x = 1000 * Math.sin(radian);
+          camera.position.z = 1000 * Math.cos(radian);
+
+          renderer.render(scene, camera); // レンダリング
+
+          requestAnimationFrame(render);
+        };
+
+        render();
+      })();
+    </script>
+	</body>
+</html>

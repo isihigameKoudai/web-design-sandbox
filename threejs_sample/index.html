@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="" />
+
+		<link rel="dns-prefetch" href="" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/setting.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+		<title>threejs_sample</title>
+	</head>
+	<body>
+    <div id="app">
+      <div class="controll">
+        <p>
+          <span>lighting x:</span>
+          <input type="range" class="light-x" min="-10" max="10" step="0.1" />
+        </p>
+        <p>
+          <span>lighting y:</span>
+          <input type="range" class="light-y" min="-10" max="10" step="0.1" />
+        </p>
+        <p>
+          <span>lighting z:</span>
+          <input type="range" class="light-z" min="-10" max="10" step="0.1" />
+        </p>
+      </div>
+      <canvas id="canvas"></canvas>
+      <footer class="footer">
+        <ul>
+          <li class="list"><a href="./">マテリアルとライティング</a></li>
+          <li class="list"><a href="./geometory.html">ジオメトリ</a></li>
+        </ul>
+      </footer>
+    </div>
+    <script src="./script/script.js"></script>
+	</body>
+</html>
