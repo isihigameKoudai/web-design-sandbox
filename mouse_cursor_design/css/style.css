@@ -147,3 +147,27 @@ body {
   }
 }
 
+.mouseovers {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.box1, .box2, .box3 {
+  border: solid 1px #fefefe;
+}
+
+.box1 {
+  width: 200px;
+  height: 300px;
+}
+
+.box2 {
+  width: 600px;
+  height: 100px;
+}
+
+.box3 {
+  width: 100px;
+  height: 700px;
+}
