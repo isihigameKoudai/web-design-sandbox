@@ -61,7 +61,7 @@ new Vue({
       })
 
     },
-    setTwennMax() {
+    setTweenMax() {
       TweenMax.to({}, .0001, {
         repeat: -1,
         onRepeat: () => {
@@ -131,6 +131,6 @@ new Vue({
   },
   mounted() {
     this.setEventListener();
-    this.setTwennMax();
+    this.setTweenMax();
   }
 });
