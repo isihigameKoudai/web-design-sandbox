@@ -41,7 +41,6 @@ new Vue({
       });
 
       const $hovereds = document.querySelectorAll('.js-hovered');
-      console.log($hovereds);
       [...$hovereds].map(item => {
         item.addEventListener('mouseover', e => {
           const {x,y,w,h} = this.getRect(e.target);
@@ -70,13 +69,14 @@ new Vue({
           this.posX += (this.mouseX - this.posX) / this.delay;
           this.posY += (this.mouseY - this.posY) / this.delay;
 
-          const { x, y, w, h} = this.hovered;
-          const targetTotalX = x + w;
-          const targetTotalY = y + h;
-          // console.log(x, y, w, h, this.posX, this.posY);
+          const { x, y, w, h, center, halfW, halfH} = this.hovered;
 
-          const followerX = this.isHover ? this.posX - ((this.addSize + w) / 2) : this.posX - (this.fWidth / 2);
-          const followerY = this.isHover ? this.posY - ((this.addSize + h) / 2) : this.posY - (this.fWidth / 2);
+          const r = this.getRootByDuringPoint({x1: center.x, y1: center.y}, {x2: this.mouseX, y2: this.mouseY});
+          const diffX = r.x / halfW * this.addSize;
+          const diffY = r.y / halfH * this.addSize;
+          const followerX = this.isHover ? x - (this.addSize / 2) + diffX / 2 : this.posX - (this.fWidth / 2);
+          const followerY = this.isHover ? y - (this.addSize / 2) + diffY / 2 : this.posY - (this.fWidth / 2);
+
 
           TweenMax.set(this.$refs.follower, {
             css: {
@@ -95,9 +95,10 @@ new Vue({
       });
     },
     getRect(target) {
-      if (!target) return {};
 
-      const targetX = target.getBoundingClientRect().left;
+      if (!target.getBoundingClientRect()) return {};
+
+      const targetX = target.getBoundingClientRect().left + window.pageXOffset;
       const targetY = target.getBoundingClientRect().top + window.pageYOffset;
       const targetW = target.clientWidth;
       const targetH = target.clientHeight;
@@ -108,12 +109,24 @@ new Vue({
         w: targetW,
         h: targetH,
         halfW: targetW / 2,
-        half: targetH / 2,
+        halfH: targetH / 2,
         center: {
           x: targetX + targetW / 2,
           y: targetY + targetH / 2,
         }
       }
+    },
+    getRootByDuringPoint(absolute = {x1: 0, y1: 0}, relative = {x2: 0, y2: 0}) {
+      const { x1, y1 } = absolute;
+      const { x2, y2 } = relative;
+      const squareX = (x2 - x1) * (x2 - x1);
+      const squareY = (y2 - y1) * (y2 - y1);
+
+      return {
+        sqrt: Math.round(Math.sqrt(squareX + squareY)),
+        x: x2 - x1,
+        y: y2 - y1
+      };
     }
   },
   mounted() {
