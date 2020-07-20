@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="" />
+
+		<link rel="dns-prefetch" href="" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/setting.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<title>title-area</title>
+	</head>
+	<body>
+		<div id="app">
+      <div>{{ count }}</div>
+      <svg viewBox="0 0 50 50" ref="follower" class="follower js-follower">
+        <path
+          d="M18 2.0845
+            a 15.9155 15.9155 0 0 1 0 31.831
+            a 15.9155 15.9155 0 0 1 0 -31.831"
+          fill="none"
+          stroke="#444"
+          stroke-width="1"
+          :stroke-dasharray="`${count}, 100`"
+        />
+      </svg>
+      <div
+        class="cursor js-cursor"
+        ref="cursor"
+      ></div>
+      <!-- <div
+        class="follower js-follower"
+      ></div> -->
+    </div>
+	</body>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="./script/script.js"></script>
+</html>

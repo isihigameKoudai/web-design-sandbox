@@ -1,0 +1,30 @@
+body {
+  cursor: none;
+  height: 100vh;
+}
+
+.cursor,
+.follower {
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: none;
+  pointer-events: none;
+}
+
+.cursor {
+  width: 8px;
+  height: 8px;
+  background-color: #222;
+  opacity: 0.8;
+  z-index: 1001;
+}
+
+.follower {
+  /* width: 60px;
+  height: 60px; */
+  /* background-color: transparent;
+  border: solid 1px #212121; */
+  z-index: 1000;
+}
