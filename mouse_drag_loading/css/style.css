@@ -21,10 +21,10 @@ body {
   z-index: 1001;
 }
 
-.follower {
-  /* width: 60px;
-  height: 60px; */
-  /* background-color: transparent;
-  border: solid 1px #212121; */
-  z-index: 1000;
+.counter {
+  position: absolute;
+  font-size: 6rem;
+  color: #eada8a;
+  text-shadow: 1px 1px 4px #eee;
+  font-family: 'DM Serif Display', serif;
 }

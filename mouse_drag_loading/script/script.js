@@ -67,6 +67,13 @@ new Vue ({
               top: this.posY - (this.fWidth / 2) + this.cWidth
             }
           });
+
+          TweenMax.set(this.$refs.counter, {
+            css: {
+              left: this.posX,
+              top: this.posY
+            }
+          });
         }
       });
     }
