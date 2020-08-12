@@ -3,6 +3,11 @@
   src: url("../fonts/airbnb_cereal/AirbnbCerealLight.ttf");
 }
 
+@font-face {
+  font-family: 'TuesdayNight-Regular';
+  src: url("../fonts/TuesedayNight/TuesdayNight-Regular.otf");
+}
+
 
 .text {
   color: #222;
@@ -44,6 +49,14 @@
   padding: 0.8rem;
 }
 
+.text-tuesday {
+  color: #222;
+  font-family: 'TuesdayNight-Regular', sans-serif;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  padding: 0.8rem;
+}
+
 .text-main {
   font-size: 9.6rem;
 }
@@ -58,4 +71,8 @@
 
 .text-forth {
   font-size: 2.4rem;
+}
+
+.margin {
+  margin-top: 10rem;
 }
