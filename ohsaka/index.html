@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="description" content="" />
+		<link rel="canonical" href="" />
+		<meta property="og:title" content="" />
+		<meta property="og:type" content="" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content="" />
+		<meta property="og:image" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:card" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:image" content="" />
+
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+		<title>backdrop-filter-sample</title>
+	</head>
+	<body>
+		<div id="app" >
+      <div class="container">
+        <div v-for="(item, i) in redCircles" class="red position" :key="i" :style="serialize(item)"></div>
+        <div v-for="(item, i) in whiteCircles" class="white position" :key="i" :style="serialize(item)"></div>
+        <div v-for="(item, i) in blueCircles" class="blue position" :key="i" :style="serialize(item)"></div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+    new Vue({
+      el: '#app',
+      data: () => ({
+        redCircles: [{
+          x: 353,
+          y: 129,
+          width: 179,
+          height: 177,
+          radius: {
+            x: '53%',
+            y: '50%',
+          }
+        },{
+          x: 258,
+          y: 223,
+          width: 153,
+          height: 165,
+          radius: {
+            x: '53%',
+            y: '53%',
+          }
+        },{
+          x: 250,
+          y: 351,
+          width: 153,
+          height: 154,
+          radius: {
+            x: '53%',
+            y: '53%',
+          }
+        },{
+          x: 126,
+          y: 301,
+          width: 170,
+          height: 173,
+          radius: {
+            x: '53%',
+            y: '53%',
+          }
+        },{
+          x: 137,
+          y: 455,
+          width: 204,
+          height: 206,
+          radius: {
+            x: '53%',
+            y: '53%',
+          }
+        },{
+          x: 247,
+          y: 595,
+          width: 113,
+          height: 185,
+          radius: {
+            x: '57%',
+            y: '57%',
+          }
+        },{
+          x: 298,
+          y: 723,
+          width: 155,
+          height: 156,
+          radius: {
+            x: '50%',
+            y: '50%',
+          }
+        },{
+          x: 419,
+          y: 709,
+          width: 215,
+          height: 218,
+          radius: {
+            x: '53%',
+            y: '53%',
+          }
+        },{
+          x: 560,
+          y: 588,
+          width: 250,
+          height: 219,
+          radius: {
+            x: '48%',
+            y: '48%',
+          }
+        },{
+          x: 621,
+          y: 411,
+          width: 162,
+          height: 200,
+          radius: {
+            x: '48%',
+            y: '48%',
+          }
+        },{
+          x: 574,
+          y: 324,
+          width: 274,
+          height: 126,
+          radius: {
+            x: '48%',
+            y: '48%',
+          }
+        },{
+          x: 512,
+          y: 132,
+          width: 234,
+          height: 231,
+          radius: {
+            x: '51%',
+            y: '51%',
+          }
+        }],
+        whiteCircles: [{
+          x: 147,
+          y: 336,
+          width: 86,
+          height: 86,
+          radius: {
+            x: '50%',
+            y: '50%',
+          }
+        },{
+          x: 220,
+          y: 528,
+          width: 92,
+          height: 90,
+          radius: {
+            x: '50%',
+            y: '50%',
+          }
+        },{
+          x: 480,
+          y: 820,
+          width: 75,
+          height: 74,
+          radius: {
+            x: '50%',
+            y: '50%',
+          }
+        },{
+          x: 670,
+          y: 651,
+          width: 122,
+          height: 110,
+          radius: {
+            x: '50%',
+            y: '50%',
+          }
+        },{
+          x: 607,
+          y: 158,
+          width: 98,
+          height: 97,
+          radius: {
+            x: '50%',
+            y: '50%',
+          }
+        }],
+        blueCircles: [{
+          x: 649,
+          y: 162,
+          width: 48,
+          height: 48,
+          radius: {
+            x: '51%',
+            y: '51%',
+          }
+        },{
+          x: 152,
+          y: 347,
+          width: 42,
+          height: 42,
+          radius: {
+            x: '51%',
+            y: '51%',
+          }
+        },{
+          x: 242,
+          y: 529,
+          width: 44,
+          height: 44,
+          radius: {
+            x: '51%',
+            y: '51%',
+          }
+        },{
+          x: 501,
+          y: 862,
+          width: 32,
+          height: 31,
+          radius: {
+            x: '51%',
+            y: '51%',
+          }
+        },{
+          x: 735,
+          y: 665,
+          width: 53,
+          height: 53,
+          radius: {
+            x: '51%',
+            y: '51%',
+          }
+        }]
+      }),
+      methods: {
+        serialize(item) {
+          const { x, y, width, height, radius } = item;
+          return `top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; border-radius: ${radius.x}; ${radius.y};`;
+        }
+      }
+    })
+  </script>
+</html>
